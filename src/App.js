@@ -36,9 +36,18 @@ export default function App() {
     setNotes(newNotes);
   };
 
+  const deleteNote = (id) => {
+    const newNotes = notes.filter((note) => note.id !== id);
+    setNotes(newNotes);
+  };
+
   return (
     <div className="conainer">
-      <NotesList notes={notes} handleAddNote={addNote} />
+      <NotesList
+        notes={notes}
+        handleAddNote={addNote}
+        handleDeletenote={deleteNote}
+      />
     </div>
   );
 }
