@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NotesList from "./components/NotesList";
 import { nanoid } from "nanoid";
+import Search from "./components/Search";
 export default function App() {
   const [notes, setNotes] = useState([
     {
@@ -24,6 +25,7 @@ export default function App() {
       date: "06/010/2023",
     },
   ]);
+  const [searchText, setSearchText] = useState("");
 
   const addNote = (text) => {
     const date = new Date();
@@ -43,8 +45,11 @@ export default function App() {
 
   return (
     <div className="conainer">
+      <Search handleSearchNote={setSearchText} />
       <NotesList
-        notes={notes}
+        notes={notes.filter((note) => {
+          note.text.toLowerCase().includes(searchText);
+        })} //para solo mostrar las notas que dependen de lo que se escriba en la searchBar
         handleAddNote={addNote}
         handleDeletenote={deleteNote}
       />
